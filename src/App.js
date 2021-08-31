@@ -8,7 +8,16 @@ function App() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('hello world');
+    //PAMIĘTAJ że to co idzie w submicie nawet jesli było z input type="number" jest stringiem
+    let amount = parseInt(count);
+    if (count <= 0) {
+      amount = 1;
+    }
+    if (count >= data.length) {
+      amount = data.length;
+    }
+    //żeby wyświetlać tylko tyle paragrafów ile chemy będziemy kopiowali naszą tablicę ze wskazaną ilością
+    setText(data.slice(0, amount));
   }
 
   return (
@@ -22,8 +31,9 @@ function App() {
         <button type="submit" className="btn">generate</button>
       </form>
       <article className="lorem-text">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, accusantium.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, accusantium.</p>
+        {text.map((item, index) => {
+          return <p key={index}>{item}</p>
+        })}
       </article>
     </section>
   );
